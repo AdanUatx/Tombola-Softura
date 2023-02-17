@@ -2,7 +2,7 @@
   font-family: Poppins, sans-serif;
 }
 
-.container{
+.contenedor{
   width: 100%;
   min-height: 100vh;
   background-color: #f3f5f8;
@@ -96,7 +96,7 @@ nav{
   }
 }
 
-.cols{
+.columna{
   width: 50%;
 }
 
@@ -200,5 +200,16 @@ button:hover{
     left: 50%;
 
   }
+}
+
+.totalUsuarios{
+  background: #3d535f;
+  color: #fff;
+  position: absolute;
+  height: 35px;
+  width: max-content;
+  border-radius: 20px;
+  text-align: center;
+  padding: 10px 10px 46px;
 }
 

@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="mb-3 text-center">
+    <table class="table bg-white">
+      <thead class="bg-success text-white">
+      <tr>
+        <th scope="col">#id</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">correo</th>
+        <th scope="col">Empresa</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let persona of listaUsuarios">
+          <th scope="row">{{persona?.idusuario}}</th>
+          <td>{{persona?.nombre}}</td>
+          <td>{{persona?.correo}}</td>
+          <td>{{persona?.cargo}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="botones">
+    <button (click)="hacerSorteo()"> Realizar Sorteo </button>
+    <button (click)="regresarInicio()"> Regresar a Inicio </button>
+
+  </div>
+</div>

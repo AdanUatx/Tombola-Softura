@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import {InicioService} from "../../Services/inicio.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import {FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
@@ -9,9 +12,16 @@ import {InicioService} from "../../Services/inicio.service";
 export class InicioComponent implements OnInit {
 
   public usuariosTotal: number = 0;
+  public formGroup1: FormGroup;
   constructor(
-    private inicioService: InicioService
-  ) { }
+    private inicioService: InicioService,
+    private modalService: NgbModal,
+    private formBuilder: FormBuilder
+  ) {
+    this.formGroup1=this.formBuilder.group(
+      {'nombre':'','correo':'','telefono':'','cargo':''}
+    );
+  }
 
   ngOnInit(): void {
     const texts = ['Participar', 'Sortear', 'Ganar!!!'];
@@ -71,4 +81,27 @@ export class InicioComponent implements OnInit {
       }
     )
     }
+
+    openSM(contenido: any){
+      this.modalService.open(contenido,{size:'md'})
+    }
+
+  nuevo(){
+    if(this.formGroup1.valid){
+      this.inicioService.agregarUsuario(this.formGroup1.value).subscribe(
+        result=>{
+          console.log(result);
+          },
+        error=>{
+          console.log(error)
+        }
+        );
+      this.obtenerUltimoUsuario();
+      //this.tombola.dismissAll();
+      alert("Registro Exitoso");
+    }else{
+      alert("Campos Vacios");
+    }
+    this.obtenerUltimoUsuario();
+  }
 }

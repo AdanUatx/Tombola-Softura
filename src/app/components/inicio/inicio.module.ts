@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {InicioComponent} from "./inicio.component";
 import { InicioRoutingModule } from './inicio-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,7 @@ import { InicioRoutingModule } from './inicio-routing.module';
   imports: [
     CommonModule,
     InicioRoutingModule,
-
+    ReactiveFormsModule
   ]
 })
 export class InicioModule { }

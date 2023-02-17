@@ -1,29 +1,49 @@
-<div class="container">
+<div class="contenedor">
   <nav>
     <div class="logo"><img src="assets/img/bitoo.png">Bitoo</div>
     <ul class="navItems">
-      <li><a href="#">Facebook Bitoo</a></li>
-      <li><a href="#">Instagram Bitoo</a></li>
-      <li><a href="#">Ir a Bitoo</a></li>
-      <li><a href="#">Home</a></li>
+      <li><a href="https://www.facebook.com/BitooMx">Facebook Bitoo</a></li>
+      <li><a href="https://www.instagram.com/bitoomx/">Instagram Bitoo</a></li>
+      <li><a href="https://bitoo.com.mx/inicio">Ir a Bitoo</a></li>
+      <li><a routerLink="/admin">Home</a></li>
     </ul>
   </nav>
 
   <div class="wrapper">
-    <div class="cols cols0">
+    <div class="columna cols0">
       <span class="topline">Tómbola</span>
       <h1>Es momento de <br> <span class="multiText">Participar</span></h1>
       <p>Participa en nuestra gran tómbola para ganar increibles premios</p>
       <div class="btns">
-        <button>Registrarse</button>
+        <button (click)="openSM(contenido)">Registrarse</button>
       </div>
     </div>
-    <div class="cols cols1">
+    <div class="columna cols1">
       <div class="imgbox">
         <img src="assets/img/mancha.png" id="splash">
         <img src="assets/img/Tombola.png">
       </div>
-      <h2 style=" background: #3d535f ;color: #fff; position: absolute; height: 35px; width: 350px; border-radius: 20px; text-align: center;"> Usuarios participando: {{ usuariosTotal }}</h2>
+      <h2 class="totalUsuarios"> Usuarios participando: {{ usuariosTotal }}</h2>
     </div>
   </div>
 </div>
+
+<ng-template #contenido let-modal class="form-register">
+  <div class="modal-header">
+    <h4 class="modal-title">Registro Tombola</h4>
+    <button class="controls1" aria-label="close" type="button" (click)="modal.dismiss()">
+      <span aria-hidden="true" class="text-white">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formGroup1" (submit)="nuevo()">
+      <div class="mb-3 text-center">
+        <input class="controls" formControlName="nombre" type="text" name="nombre" id="nombre" placeholder="Ingrese su Nombre">
+        <input class="controls" formControlName="correo" type="email" name="correo" id="correo" placeholder="Ingrese su Correo">
+        <input class="controls" formControlName="telefono" type="tel" name="telefono" id="telefono" placeholder="Ingrese su Telefono">
+        <input class="controls" formControlName="cargo" type="text" name="cargo" id="cargo" placeholder="Empresa">
+        <button class=" btn btn-success" >Registrar</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
