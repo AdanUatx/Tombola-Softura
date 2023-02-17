@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {InicioService} from "../../Services/inicio.service";
 import Swal from 'sweetalert2';
 import {Router} from "@angular/router";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-home',
@@ -11,13 +13,28 @@ import {Router} from "@angular/router";
 export class HomeComponent implements OnInit {
   listaUsuarios:any;
   ganador: any;
+  logueado: boolean = false;
+  public username:string = 'CarlaHdz';
+  public password:string = 'Softura2006';
+  public formGroup1: FormGroup;
   constructor(
     private inicioService: InicioService,
-    private router: Router
-  ) { }
+    private router: Router,
+     private formBuilder: FormBuilder
+  ) {
+    this.formGroup1=this.formBuilder.group(
+      {'nombre':'','password':''}
+    );
+  }
 
   ngOnInit(): void {
-    this.obtenerUsuarios()
+    this.obtenerUsuarios();
+    if (localStorage.getItem('logueado')){
+      this.logueado = true;
+    }else{
+      this.logueado = false;
+    }
+
   }
 
   obtenerUsuarios(){
@@ -26,6 +43,18 @@ export class HomeComponent implements OnInit {
         this.listaUsuarios = resp.data.usuario;
       }
     )
+  }
+
+  login(){
+    const datosForm = this.formGroup1.value;
+    if(datosForm.nombre === this.username && datosForm.password === this.password){
+      this.logueado = true;
+      localStorage.setItem('logueado','true');
+      Swal.fire('Excelente','Login Existoso!!!','success');
+    }else{
+      Swal.fire('Opssss','El usuario o contraseña son incorrectos','error');
+    }
+
   }
 
 
