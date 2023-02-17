@@ -5,7 +5,7 @@
       <li><a href="https://www.facebook.com/BitooMx">Facebook Bitoo</a></li>
       <li><a href="https://www.instagram.com/bitoomx/">Instagram Bitoo</a></li>
       <li><a href="https://bitoo.com.mx/inicio">Ir a Bitoo</a></li>
-      <li><a routerLink="/admin">Home</a></li>
+      <li><a routerLink="/admin">Admin</a></li>
     </ul>
   </nav>
 
@@ -38,10 +38,10 @@
   <div class="modal-body">
     <form [formGroup]="formGroup1" (submit)="nuevo()">
       <div class="mb-3 text-center">
-        <input class="controls" formControlName="nombre" type="text" name="nombre" id="nombre" placeholder="Ingrese su Nombre">
-        <input class="controls" formControlName="correo" type="email" name="correo" id="correo" placeholder="Ingrese su Correo">
-        <input class="controls" formControlName="telefono" type="tel" name="telefono" id="telefono" placeholder="Ingrese su Telefono">
-        <input class="controls" formControlName="cargo" type="text" name="cargo" id="cargo" placeholder="Empresa">
+        <input class="form-control" formControlName="nombre" type="text" name="nombre" id="nombre" placeholder="Ingrese su Nombre"> <br>
+        <input class="form-control" formControlName="correo" type="email" name="correo" id="correo" placeholder="Ingrese su Correo"> <br>
+        <input class="form-control" formControlName="telefono" type="tel" name="telefono" id="telefono" placeholder="Ingrese su Telefono"> <br>
+        <input class="form-control" formControlName="cargo" type="text" name="cargo" id="cargo" placeholder="Empresa"> <br>
         <button class=" btn btn-success" >Registrar</button>
       </div>
     </form>

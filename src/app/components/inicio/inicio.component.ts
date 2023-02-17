@@ -3,7 +3,7 @@ import { AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import {InicioService} from "../../Services/inicio.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
+import Swal  from 'sweetalert2';
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
@@ -97,8 +97,8 @@ export class InicioComponent implements OnInit {
         }
         );
       this.obtenerUltimoUsuario();
-      //this.tombola.dismissAll();
-      alert("Registro Exitoso");
+      this.modalService.dismissAll();
+      Swal.fire('Excelente!!!','Registro completado correctamente','success')
     }else{
       alert("Campos Vacios");
     }

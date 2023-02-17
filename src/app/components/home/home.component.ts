@@ -32,16 +32,17 @@ export class HomeComponent implements OnInit {
   hacerSorteo() {
     const listaMezclada = this.shuffle([...this.listaUsuarios]);
     this.ganador = listaMezclada.shift();
-    console.log(`El ganador es ${this.ganador.nombre} con id ${this.ganador.idusuario}`);
-    this.inicioService.eliminarUsuario(this.ganador.idusuario).subscribe(
-      resp => {
-          console.log(resp);
-      }
-    )
+    //console.log(`El ganador es ${this.ganador.nombre} con id ${this.ganador.idusuario}`);
     Swal.fire({
       title: 'El ganador es:',
       text: `${this.ganador.nombre} con ID ${this.ganador.idusuario}`,
-    })
+      icon: "success"
+    });
+    this.inicioService.eliminarUsuario(this.ganador.idusuario).subscribe(
+      resp => {
+        //console.log(resp);
+      }
+    );
     this.obtenerUsuarios();
   }
 
