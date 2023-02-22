@@ -24,7 +24,7 @@ export class InicioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const texts = ['Participar', 'Sortear', 'Ganar!!!'];
+   /* const texts = ['Participar', 'Sortear', 'Ganar!!!'];
     let index = 0;
 
     const text = document.querySelector('.multiText');
@@ -67,7 +67,7 @@ export class InicioComponent implements OnInit {
       }, 50);
     }
 
-    updateText();
+    updateText();*/
 
 
     this.obtenerUltimoUsuario();

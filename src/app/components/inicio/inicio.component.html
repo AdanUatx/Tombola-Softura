@@ -1,32 +1,43 @@
-<div class="contenedor">
-  <nav>
-    <div class="logo"><img loading="lazy" src="assets/img/bitoo.png">Bitoo</div>
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12">
     <ul class="navItems">
-      <li><a href="https://www.facebook.com/BitooMx">Facebook Bitoo</a></li>
-      <li><a href="https://www.instagram.com/bitoomx/">Instagram Bitoo</a></li>
-      <li><a href="https://bitoo.com.mx/inicio">Ir a Bitoo</a></li>
-      <li><a routerLink="/admin">Admin</a></li>
-    </ul>
-  </nav>
+      <li><a href="https://www.bitoo.com.mx/conocenos">Conócenos <img src="assets/img/ICONO%20CONOCENOS.png" style="max-width: 50px"></a></li>
+      <li><a routerLink="/admin">Admin <img src="assets/img/ICONO%20ADMIN.png" style="max-width: 50px"></a></li>
+      <li><a href="https://bitoo.com.mx/inicio">Ir a Bitoo <img src="assets/img/ICONO%20INICIO%20BITOO.png" style="max-width: 50px"></a></li>
+      <li><a href="https://www.facebook.com/BitooMx"><img src="assets/img/ICONO%20REDES%20SOCIALES%20Facebook.png" style="max-width: 65px; margin-top: 10%"></a></li>
+      <li><a href="https://www.instagram.com/bitoomx/"><img src="assets/img/ICONO%20REDES%20SOCIALES%20instagram.png" style="max-width: 65px; margin-top: 10%"></a></li>
 
-  <div class="wrapper">
-    <div class="columna cols0">
-      <span class="topline">Tómbola</span>
-      <h1>Es momento de <br> <span class="multiText">Participar</span></h1>
-      <p>Participa en nuestra gran tómbola para ganar increibles premios</p>
-      <div class="btns">
-        <button (click)="openSM(contenido)">Registrarse</button>
-      </div>
-    </div>
-    <div class="columna cols1">
-      <div class="imgbox">
-        <img loading="lazy" src="assets/img/mancha.png" id="splash">
-        <img loading="lazy" src="assets/img/Tombola.png">
-      </div>
-      <h2 class="totalUsuarios"> Usuarios participando: {{ usuariosTotal }}</h2>
-    </div>
+    </ul>
   </div>
 </div>
+
+<div class="row zoom-in">
+  <div class="col-lg-12 col-md-12 col-sm-12" style="display: flex; justify-content: center">
+    <img src="assets/img/SORTEOS.png" style="max-width: 850px">
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12" style="display: flex; justify-content: center">
+    <img src="assets/img/LOGO%20BITOO.png" style="max-width: 450px;">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6" style="display: flex; justify-content: flex-end">
+    <img src="assets/img/REGÍSTRATE%20.png" style="max-width: 300px">
+  </div>
+  <div class="col-lg-6" style="display: flex; justify-content: flex-start">
+    <img src="assets/img/USUARIO.png" style="max-width: 310px; height: min-content">
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <p style="color: white">Engineered by <a href="https://softura.com.mx/SofturaSolutions/index.php/es/"><img src="assets/img/SOFTURA%20LOGO.png" style="max-width: 150px"></a>
+  </div>
+</div>
+
+
+
 
 <ng-template #contenido let-modal class="form-register">
   <div class="modal-header">

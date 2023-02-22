@@ -1,4 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 body{
   overflow: hidden;
+  background-image: url("src/assets/img/FONDO 1.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed ;
+}
+@font-face {
+  font-family: 'Comfortaa';
+  src: url('src/assets/img/Comfortaa-Bold.ttf');
 }
