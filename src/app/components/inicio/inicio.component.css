@@ -1,8 +1,6 @@
 *{
   font-family: Comfortaa ,Poppins, sans-serif;
 }
-
-
 .navItems{
   display: flex;
   justify-content: center;
@@ -30,38 +28,70 @@
     transform: scale(1);
   }
   50% {
-    transform: scale(1.4);
+    transform: scale(1.3);
   }
   100% {
     transform: scale(1);
   }
-
 }
 
-.example-container {
-  width: 500px;
-  height: 300px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-}
 .registrobutton{
   cursor: pointer;
 }
 .txtregistrar{
-  margin-right:140px;
-  font-size: 1.4em;
+  margin-right:108px;
+  font-size: 1.3em;
   font-family: Comfortaa ,Poppins, sans-serif;
 }
-.example-sidenav-content {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
+.txtrusuarios{
+  margin-left:10px;
+  font-size: 1.3em;
+  font-family: Comfortaa ,Poppins, sans-serif;
 }
 
-.example-sidenav {
-  padding: 20px;
-}
+/* Para 480px */
+@media only screen and (max-width: 575px) and (min-width: 50px) {
+  .mitad{
+    width:50%;
+  }
 
+  .completo{
+    width: 103%;
+    margin: auto;
+  }
+
+  .txtregistrar{
+    margin-right:108px;
+    font-size: 1.2em;
+    font-family: Comfortaa ,Poppins, sans-serif;
+  }
+  .txtrusuarios{
+    margin-left:20px;
+    font-size: 1.2em;
+    font-family: Comfortaa ,Poppins, sans-serif;
+  }
+  .navItems li a{
+     font-size: 1em;
+   }
+
+  .navItems li img{
+     font-size: 1em;
+   }
+  .redesimg{
+    width: 40px;
+  }
+  @keyframes zoomInOut {
+    0% {
+      transform: scale(.5);
+    }
+    50% {
+      transform: scale(.75);
+    }
+    100% {
+      transform: scale(.5);
+    }
+  }
+}
 
 
 
