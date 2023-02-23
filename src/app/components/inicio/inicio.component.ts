@@ -77,9 +77,24 @@ export class InicioComponent implements OnInit {
 
     updateText();*/
 
+    var navbar = document.querySelector('#navbarNav');
+
+    // @ts-ignore
+    navbar.addEventListener('show.bs.collapse', function () {
+      // se ejecuta cuando el menú se muestra
+    });
+
+    // @ts-ignore
+    navbar.addEventListener('hide.bs.collapse', function () {
+      // se ejecuta cuando el menú se oculta
+    });
+
+
 
     this.obtenerUltimoUsuario();
   }
+
+
 
     public obtenerUltimoUsuario(){
     this.inicioService.obtenerUltimo().subscribe(
