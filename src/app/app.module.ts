@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +17,9 @@ import {MatMenuModule} from '@angular/material/menu';
     ReactiveFormsModule,
     MatMenuModule,
   ],
-  providers: [],
+  providers: [
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
