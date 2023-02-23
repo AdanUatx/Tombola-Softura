@@ -39,13 +39,34 @@
   cursor: pointer;
 }
 .txtregistrar{
-  margin-right:108px;
-  font-size: 1.3em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-85%, -50%);
+  text-align: center;
+  color: black;
+  font-size: 19px;
   font-family: Comfortaa ,Poppins, sans-serif;
 }
 .txtrusuarios{
-  margin-left:10px;
-  font-size: 1.3em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-80%, -50%);
+  text-align: center;
+  color: black;
+  font-size: 17px;
+  font-family: Comfortaa ,Poppins, sans-serif;
+}
+
+.txtNumUsuarios{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(350%, -50%);
+  text-align: center;
+  color: black;
+  font-size: 31px;
   font-family: Comfortaa ,Poppins, sans-serif;
 }
 
@@ -62,10 +83,10 @@
 /* Estilos para pantallas más pequeñas */
 @media (max-width: 991px) {
   .large {
-    max-width: 100% !important;
+    max-width: 120% !important;
   }
   img.small {
-    max-width: 100% !important;
+    max-width: 70% !important;
     height: auto !important;
   }
 }
@@ -81,16 +102,16 @@
     margin: auto;
   }
 
-  .txtregistrar{
+  /*.txtregistrar{
     margin-right:108px;
     font-size: 1.2em;
     font-family: Comfortaa ,Poppins, sans-serif;
-  }
-  .txtrusuarios{
+  }*/
+  /*.txtrusuarios{
     margin-left:20px;
     font-size: 1.2em;
     font-family: Comfortaa ,Poppins, sans-serif;
-  }
+  }*/
   .navItems li a{
      font-size: 1em;
    }

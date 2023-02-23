@@ -132,7 +132,7 @@ export class InicioComponent implements OnInit {
       this.modalService.dismissAll();
       Swal.fire('Excelente!!!','Registro completado correctamente','success')
     }else{
-      alert("Campos Vacios");
+      Swal.fire("Opsss","Campos Vacios",'error');
     }
     this.obtenerUltimoUsuario();
   }
