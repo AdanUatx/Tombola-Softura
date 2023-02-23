@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import {InicioService} from "../../Services/inicio.service";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal  from 'sweetalert2';
 @Component({
@@ -12,18 +12,26 @@ import Swal  from 'sweetalert2';
 export class InicioComponent implements OnInit {
 
   public usuariosTotal: number = 0;
+  public modal_reference: NgbModalRef | undefined;
+  public showFiller: boolean;
   public formGroup1: FormGroup;
   constructor(
     private inicioService: InicioService,
     private modalService: NgbModal,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _modalService: NgbModal,
   ) {
     this.formGroup1=this.formBuilder.group(
       {'nombre':'','correo':'','telefono':'','cargo':''}
     );
+    this.showFiller = false;
   }
 
   ngOnInit(): void {
+
+
+
+
    /* const texts = ['Participar', 'Sortear', 'Ganar!!!'];
     let index = 0;
 
@@ -82,6 +90,15 @@ export class InicioComponent implements OnInit {
     )
     }
 
+  public abrirModal(modal: any, size: any) {
+    this.modal_reference = this._modalService.open(modal, {
+      backdrop: 'static',
+      keyboard: false,
+      centered: true,
+      size: size,
+      windowClass: 'modal-holder'
+    });
+  }
     openSM(contenido: any){
       this.modalService.open(contenido,{size:'md'})
     }
