@@ -1,0 +1,83 @@
+<div class="container">
+  <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+  <nav class="navbar navbar-expand-lg menu ">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav m-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.bitoo.com.mx/conocenos" style="color: white">Conócenos <img loading="lazy" src="assets/img/ICONO%20CONOCENOS.png" style="max-width: 50px"></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin" style="color: white">Admin <img loading="lazy" src="assets/img/ICONO%20ADMIN.png" style="max-width: 50px"></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://bitoo.com.mx/inicio" style="color: white">Ir a Bitoo <img loading="lazy" src="assets/img/ICONO%20INICIO%20BITOO.png" style="max-width: 50px"></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.facebook.com/BitooMx"><img loading="lazy" src="assets/img/ICONO%20REDES%20SOCIALES%20Facebook.png" class="redesimg" style="max-width: 65px; max-height: 65px;"></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.instagram.com/bitoomx/"><img loading="lazy" src="assets/img/ICONO%20REDES%20SOCIALES%20instagram.png" class="redesimg" style="max-width: 65px;  max-height: 65px;"></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="row">
+    <div class="col-md-12" style="display: flex; justify-content: center">
+      <img loading="lazy" src="assets/img/SORTEOS.png" class="img-fluid mx-auto d-block zoom-in large" style="max-width: 850px;" alt="Sorteos">
+    </div>
+  </div>
+  <div class="row" style="display: flex;justify-content: center;">
+    <div class="col-md-12" style="display: flex; justify-content: center; max-width: 85%">
+      <img loading="lazy" src="assets/img/LOGO%20BITOO.png" class="img-fluid mx-auto d-block small" style="max-width: 350px;" alt="Logo Bitoo">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 order-md-2">
+      <div style="position: relative;">
+        <img loading="lazy" src="assets/img/USUARIO.png" style="max-width: 260px;" class="img-fluid mx-auto d-block" alt="Usuarios">
+        <p class="txtrusuarios">Usuarios <br> Participantes</p>
+        <p class="txtNumUsuarios">{{ usuariosTotal }} </p>
+      </div>
+    </div>
+    <div class="col-md-6 order-md-1">
+      <div style="position: relative;">
+        <a class="d-block text-center registrobutton" (click)="abrirModal(Registro,'md')">
+          <img loading="lazy" src="assets/img/REGÍSTRATE%20.png" style="max-width: 260px;" class="img-fluid mx-auto d-block" alt="Registrarse">
+          <p class="txtregistrar">Registrarse</p>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <p style="color: white">Engineered by <a href="https://softura.com.mx/SofturaSolutions/index.php/es/"><img loading="lazy" src="assets/img/SOFTURA%20LOGO.png" style="max-width: 150px"></a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<ng-template #Registro let-modal class="form-register">
+  <div class="modal-header">
+    <h4 class="modal-title">Registro Tombola</h4>
+    <button class="controls1" aria-label="close" type="button" (click)="modal.dismiss()">
+      <span aria-hidden="true" class="text-danger">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formGroup1" (submit)="nuevo()">
+      <div class="mb-3 text-center">
+        <input class="form-control" formControlName="nombre" type="text" name="nombre" id="nombre" placeholder="Ingrese su Nombre" required> <br>
+        <input class="form-control" formControlName="correo" type="email" name="correo" id="correo" placeholder="Ingrese su Correo" required> <br>
+        <input class="form-control" formControlName="telefono" type="tel" name="telefono" id="telefono" placeholder="Ingrese su Telefono" required> <br>
+        <input class="form-control" formControlName="cargo" type="text" name="cargo" id="cargo" placeholder="Empresa" required> <br>
+        <button class=" btn btn-success" >Registrar</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

@@ -1,0 +1,145 @@
+*{
+  font-family: Comfortaa ,Poppins, sans-serif;
+}
+.menu{
+  background: transparent;
+  padding: 0px;
+}
+.nav-item{
+  display: flex;
+  justify-content: center;
+}
+
+.navItems li{
+  list-style: none;
+  margin: 0 15px;
+}
+
+.navItems li a{
+  font-size: 20px;
+  color: white;
+  letter-spacing: 3px;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+.zoom-in{
+  animation: zoomInOut 2s ease-in-out infinite;
+}
+
+@keyframes zoomInOut {
+  0% {
+    transform: scale(.6);
+  }
+  50% {
+    transform: scale(.8);
+  }
+  100% {
+    transform: scale(.6);
+  }
+}
+
+.registrobutton{
+  cursor: pointer;
+}
+.txtregistrar{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-85%, -50%);
+  text-align: center;
+  color: black;
+  font-size: 19px;
+  font-family: Comfortaa ,Poppins, sans-serif;
+}
+.txtrusuarios{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-80%, -50%);
+  text-align: center;
+  color: black;
+  font-size: 17px;
+  font-family: Comfortaa ,Poppins, sans-serif;
+}
+
+.txtNumUsuarios{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(92%, -50%);
+  text-align: center;
+  color: white;
+  font-size: 31px;
+  min-width: 50px;
+  white-space: nowrap;
+  font-family: Comfortaa ,Poppins, sans-serif;
+}
+
+@media (min-width: 992px) {
+  .large {
+    width: 850px !important;
+  }
+  img.small {
+    max-width: 450px;
+    height: auto;
+  }
+}
+
+/* Estilos para pantallas más pequeñas */
+@media (max-width: 991px) {
+  .large {
+    max-width: 120% !important;
+  }
+  img.small {
+    max-width: 70% !important;
+    height: auto !important;
+  }
+}
+
+/* Para 480px */
+@media only screen and (max-width: 575px) and (min-width: 50px) {
+  .mitad{
+    width:50%;
+  }
+
+  .completo{
+    width: 103%;
+    margin: auto;
+  }
+
+  /*.txtregistrar{
+    margin-right:108px;
+    font-size: 1.2em;
+    font-family: Comfortaa ,Poppins, sans-serif;
+  }*/
+  /*.txtrusuarios{
+    margin-left:20px;
+    font-size: 1.2em;
+    font-family: Comfortaa ,Poppins, sans-serif;
+  }*/
+  .navItems li a{
+     font-size: 1em;
+   }
+
+  .navItems li img{
+     font-size: 1em;
+   }
+  .redesimg{
+    width: 40px;
+  }
+  @keyframes zoomInOut {
+    0% {
+      transform: scale(.5);
+    }
+    50% {
+      transform: scale(.75);
+    }
+    100% {
+      transform: scale(.5);
+    }
+  }
+}
+
+
+
