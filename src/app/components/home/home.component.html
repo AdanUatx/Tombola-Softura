@@ -1,45 +1,154 @@
-<div *ngIf="logueado" class="container">
-  <div class="mb-3 text-center">
-    <table class="table bg-white">
-      <thead class="bg-success text-white">
-      <tr>
-        <th scope="col">#id</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">correo</th>
-        <th scope="col">Empresa</th>
-      </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let persona of listaUsuarios">
-          <th scope="row">{{persona?.idusuario}}</th>
-          <td>{{persona?.nombre}}</td>
-          <td>{{persona?.correo}}</td>
-          <td>{{persona?.cargo}}</td>
-        </tr>
-      </tbody>
-    </table>
+<div *ngIf="logueado" class="container bg-warning p-0 m-0 col-lg-12 d-flex">
+  <div class="menulateral">
+    <div class="d-flex flex-column flex-shrink-0 bg-light" >
+      <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+        <img loading="lazy" src="https://ecoevents.blob.core.windows.net/comprandoando/logos%2Flogo%201.0.png" class="img-fluid mx-auto d-block small" style="max-width: 100px;" alt="Logo Bitoo">
+      </a>
+      <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+        <li class="nav-item">
+          <a (click)="regresarInicio()" class="nav-link  py-3 border-bottom icon-home" aria-current="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
+            Inicio Tombola
+          </a>
+        </li>
+        <li>
+          <a (click)="seccionActiva('Regalos')" [ngClass]="Regalos?'active':''"  class="nav-link py-3 border-bottom icon-gift1" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
+          Regalos
+          </a>
+        </li>
+        <li>
+          <a (click)="seccionActiva('Usuario')" [ngClass]="Usuarios?'active':''"  class="nav-link  py-3 border-bottom icon-users" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
+           Usuarios
+          </a>
+        </li>
+        <li>
+          <a (click)="seccionActiva('Sorteo')"  [ngClass]="Sorteo?'active':''"  class="nav-link py-3 border-bottom icon-clubs" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
+            Realizar Sorteo
+          </a>
+        </li>
+        <li>
+          <a (click)="seccionActiva('TyC')"  [ngClass]="Terminos?'active':''"  class="nav-link py-3 border-bottom icon-clipboard" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Customers">
+          Terminos y Condiciones
+          </a>
+        </li>
+      </ul>
+      <div class="dropdown border-top">
+        <a  class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle icon-user-solid-circle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
+        </a>
+        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3" style="">
+          <li><a class="dropdown-item" href="#">New project...</a></li>
+          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Sign out</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="contenido">
+
+    <section class="col-11  Content p-5 text-center" *ngIf="Usuarios">
+
+      <h2> Usuarios Participantes</h2>
+      <mat-paginator class="mat-elevation-z8"  [length]="total" [pageSize]="pageSize" (page)="getPaginatorData($event)">
+      </mat-paginator>
+
+      <div class="table-responsive" >
+        <table class="table text-center">
+          <thead class="thead-dark">
+          <tr>
+            <th scope="col">#id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">correo</th>
+            <th scope="col">Empresa</th>
+            <th scope="col">Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let persona of listaUsuarios | slice: lowValue : highValue ; let i = index">
+            <td> <span>{{i+1}}</span></td>
+
+            <td><span>{{persona.nombre}}</span></td>
+            <td><span>{{persona.correo}}</span></td>
+            <td><span>{{persona.cargo}}</span></td>
+            <td><a class="icon-trash text-danger" (click)="eliminar(persona.idusuario)"></a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+
+      <section class="col-11  Content p-5 text-center" *ngIf="Sorteo">
+
+        <h2> Sorteo</h2>
+        <div class="modal-header" style="background:white; display: block; border-radius: 5px !important;">
+          <div class="modal-title">
+            <h3>GANADOR:</h3>
+          </div>
+          <div class="modal-dialog-centered" style="justify-content: center">
+            <p> {{ resultado?.nombre }}</p>
+          </div>
+        </div>
+      <div class="botones">
+        <button (click)="girar()"> Realizar Sorteo </button>
+        <button (click)="regresarInicio()"> Regresar a Inicio</button>
+
+      </div>
+    </section>
+
+    <section class="col-11  Content p-5 text-center" *ngIf="Regalos">
+
+      <h2 class="d-flex justify-content-center text-center  fw-bold icon-gift" >Añadir Premio</h2>
+      <div class="d-flex justify-content-center text-center mt-4">
+        <form class="p-4 mt-4 bg-light"  id="form_regalos" method="post">
+          <div class="form-group">
+            <label >Articulo:</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="icon-list-add"></i>
+                    </span>
+              </div>
+              <input type="text" class="form-control" id="nombre" name="nombre" required  [(ngModel)]="nombre">
+            </div>
+          </div>
+          <div class="form-group">
+            <label >Cantidad:</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="icon-pen"></i>
+                    </span>
+              </div>
+              <input type="number" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="cantidad" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label >Probabilidad:</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="icon-pen"></i>
+                    </span>
+              </div>
+              <input type="number" class="form-control" id="probabilidad" name="probabilidad" [(ngModel)]="probabilidad" placeholder="Ingrese la probabilidad deseada para obtener el premio del 1 al 10" required>
+            </div>
+          </div>
+          <a class="btn  mt-4 btn-danger icon-circle-up fw-bold p-2"  (click)="guardaRegalo()"   id="guardarRegalo">Registrar</a>
+        </form>
+      </div>
+    </section>
+    <section class="col-11  Content p-5 text-center" *ngIf="Terminos">
+
+      <h2> Terminos y Condiciones</h2>
+    </section>
+
   </div>
 
-  <div class="botones">
-    <button (click)="hacerSorteo()"> Realizar Sorteo </button>
-    <button (click)="regresarInicio()"> Regresar a Inicio </button>
-
-  </div>
 </div>
 
-<div class="center" *ngIf="!logueado" style=" background: linear-gradient(120deg,#2980b9, #8e44ad); padding-bottom: 20px">
-  <h1>Login</h1>
-  <form [formGroup]="formGroup1" (submit)="login()">
-    <div class="txt_field">
-      <input type="text" required formControlName="nombre"  name="nombre" id="nombre">
-      <span></span>
-      <label>Username</label>
-    </div>
-    <div class="txt_field">
-      <input type="password" required formControlName="password"  name="password" id="password">
-      <span></span>
-      <label>Password</label>
-    </div>
-    <input type="submit" value="Login">
-  </form>
+<div  *ngIf="!logueado" class="container">
+  <strong>{{logueado}}</strong>
+  <app-modal-login [logueado]="logueado"  (logueadosalida)="addItem($event)"></app-modal-login>
 </div>
+

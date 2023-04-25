@@ -35,7 +35,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6 order-md-2">
+    <div class="col-md-6 order-md-2" style="align-self: center">
       <div style="position: relative;">
         <img loading="lazy" src="assets/img/USUARIO.png" style="max-width: 260px;" class="img-fluid mx-auto d-block" alt="Usuarios">
         <p class="txtrusuarios">Usuarios <br> Participantes</p>
@@ -72,7 +72,7 @@
   <div class="modal-body">
     <form [formGroup]="formGroup1" (submit)="nuevo()">
       <div class="mb-3 text-center">
-        <input class="form-control" formControlName="nombre" type="text" name="nombre" id="nombre" placeholder="Ingrese su Nombre" required> <br>
+        <input class="form-control" formControlName="nombre" type="text" name="nombre" id="nombre" minlength="10" placeholder="Ingrese su Nombre" required> <br>
         <input class="form-control" formControlName="correo" type="email" name="correo" id="correo" placeholder="Ingrese su Correo" required> <br>
         <input class="form-control" formControlName="telefono" type="tel" name="telefono" id="telefono" placeholder="Ingrese su Telefono" required> <br>
         <input class="form-control" formControlName="cargo" type="text" name="cargo" id="cargo" placeholder="Empresa" required> <br>
