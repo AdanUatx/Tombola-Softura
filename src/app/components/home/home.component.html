@@ -143,7 +143,6 @@
 </div>
 
 <div  *ngIf="!logueado" class="container">
-  <strong>{{logueado}}</strong>
   <app-modal-login [logueado]="logueado"  (logueadosalida)="addItem($event)"></app-modal-login>
 </div>
 
