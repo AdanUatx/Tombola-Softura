@@ -45,9 +45,8 @@
       <h2> Usuarios Participantes</h2>
       <mat-paginator class="mat-elevation-z8"  [length]="total" [pageSize]="pageSize" (page)="getPaginatorData($event)">
       </mat-paginator>
-
       <div class="table-responsive" >
-        <table class="table text-center">
+        <table class="table text-center" id="usuarios">
           <thead class="thead-dark">
           <tr>
             <th scope="col">#id</th>
@@ -68,6 +67,11 @@
           </tr>
           </tbody>
         </table>
+
+        <a  class="btn btn-success excel" *ngIf="!descargando" (click)="descargarExcel()" >
+          <span *ngIf="descargando" class="spinner-border spinner-border-sm" role="status "
+                aria-hidden="true "></span>Descargar Excel
+        </a>
       </div>
 
     </section>
@@ -88,6 +92,10 @@
         <button (click)="regresarInicio()"> Regresar a Inicio</button>
 
       </div>
+
+        <input type="text" class="form-control" [(ngModel)]="festejo" placeholder="Ingresar Festividad"> <a (click)="agregarFestividad()" *ngIf="!load" class="btn mt-3 btn-success">Cambiar</a><br>
+        <span *ngIf="load" class="spinner-border spinner-border-sm" size="60" role="status "
+              aria-hidden="true "><br></span>
     </section>
 
     <section class="col-11  Content p-5 text-center" *ngIf="Regalos">
@@ -131,6 +139,7 @@
           <a class="btn  mt-4 btn-danger icon-circle-up fw-bold p-2"  (click)="guardaRegalo()"   id="guardarRegalo">Registrar</a>
         </form>
       </div>
+
     </section>
 
 </div>

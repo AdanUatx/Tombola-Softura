@@ -7,10 +7,11 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
-  styleUrls: ['./inicio.component.css']
+  styleUrls: ['./inicio.component.scss']
 })
 export class InicioComponent implements OnInit {
   public blnMostrarCookies: boolean = true;
+  public festejo: string;
 
   public usuariosTotal: number = 0;
   public modal_reference: NgbModalRef | undefined;
@@ -28,18 +29,19 @@ export class InicioComponent implements OnInit {
       {'nombre':'','correo':'','telefono':'','cargo':''}
     );
     this.showFiller = false;
+    this.festejo = '';
   }
 
   ngOnInit(): void {
 
     if(localStorage.getItem('cookies')){
-      this.blnMostrarCookies = false
+      this.blnMostrarCookies = false;
     }else{
       this.blnMostrarCookies = true;
     }
-    this.obtenerPremios()
+    this.obtenerPremios();
     this.obtenerUltimoUsuario();
-
+    this.festejo = localStorage.getItem('festividad');
   }
 
 

@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import { FormGroup} from '@angular/forms';
 import {MatPaginatorIntl, PageEvent} from '@angular/material/paginator';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,9 @@ export class HomeComponent implements OnInit {
     this.paginator.nextPageLabel = ' Next';
     this.Usuarios = true;
     this.Regalos = false;
+    this.load = false;
     this.Sorteo = false;
+    this.descargando = false;
     this.Terminos = false;
     this.pageSize = 8;
     this.pageIndex = 0;
@@ -31,16 +34,20 @@ export class HomeComponent implements OnInit {
     this.loaderGiro = true;
     this.total = 0;
     this.resultado = '';
+    this.festejo = '';
     this.logueado = false;
   }
   public listaUsuarios: any;
   public pageSize: number;
+  public festejo: string;
   public pageIndex: number;
   public resultado: any;
   public ganador: any;
   public interval: any;
   public local: string;
   public logueado: boolean;
+  public load: boolean;
+  public descargando: boolean;
   public Usuarios: boolean;
   public Regalos: boolean;
   public Sorteo: boolean;
@@ -61,7 +68,8 @@ export class HomeComponent implements OnInit {
     } else {
       this.logueado = false;
     }
-
+    this.festejo = localStorage.getItem('festividad');
+    this.descargando = false;
     this.loaderGiro = true;
   }
 
@@ -165,5 +173,22 @@ export class HomeComponent implements OnInit {
       Swal.fire('Error', 'Ocurrió un error al enviar la solicitud.', 'error');
     });
 }
+  public agregarFestividad(){
+    this.load = true;
+    localStorage.setItem('festividad', this.festejo);
+    setTimeout(() => { this.load = false;  }, 2000);
+  }
+
+
+  descargarExcel(){
+    this.descargando = true;
+    const name = 'Usuarios.xlsx';
+    const element = document.getElementById('usuarios');
+    const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    const book: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(book, worksheet, 'Respuestas');
+    XLSX.writeFile(book, name);
+    setTimeout(() => { this.descargando = false;   }, 2000);
+  }
 
 }
