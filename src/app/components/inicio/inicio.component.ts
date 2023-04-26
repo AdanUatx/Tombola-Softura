@@ -17,6 +17,7 @@ export class InicioComponent implements OnInit {
   public showFiller: boolean;
   public formGroup1: FormGroup;
   condiciones_servicio: boolean = false;
+  listaPremios: any;
   constructor(
     private inicioService: InicioService,
     private modalService: NgbModal,
@@ -57,6 +58,7 @@ export class InicioComponent implements OnInit {
       resp => {
         // @ts-ignore
         const data = resp.data.articulo;
+        this.listaPremios = data;
       });
     }
 
