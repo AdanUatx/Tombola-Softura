@@ -1,6 +1,6 @@
 import {NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {InicioComponent} from "./inicio.component";
+import {InicioComponent} from './inicio.component';
 import { InicioRoutingModule } from './inicio-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSidenavModule} from '@angular/material/sidenav';
