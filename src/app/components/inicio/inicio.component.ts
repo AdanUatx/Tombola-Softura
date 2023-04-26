@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
-import {InicioService} from "../../Services/inicio.service";
-import {NgbModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
+import {InicioService} from '../../Services/inicio.service';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import Swal  from 'sweetalert2';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
@@ -17,6 +17,7 @@ export class InicioComponent implements OnInit {
   public showFiller: boolean;
   public formGroup1: FormGroup;
   condiciones_servicio: boolean = false;
+  listaPremios: any;
   constructor(
     private inicioService: InicioService,
     private modalService: NgbModal,
@@ -36,56 +37,9 @@ export class InicioComponent implements OnInit {
     }else{
       this.blnMostrarCookies = true;
     }
-
-
-   /* const texts = ['Participar', 'Sortear', 'Ganar!!!'];
-    let index = 0;
-
-    const text = document.querySelector('.multiText');
-
-    function updateText() {
-      const currentText = texts[index];
-      // @ts-ignore
-      const currentLength = text.textContent.length;
-
-      // Eliminar el texto actual letra por letra
-      const interval1 = setInterval(() => {
-        // @ts-ignore
-        if (text.textContent.length > 0) {
-          // @ts-ignore
-          text.textContent = text.textContent.slice(0, -1);
-        } else {
-          clearInterval(interval1);
-
-          // Reemplazar el texto con el nuevo texto
-          let i = 0;
-          const interval2 = setInterval(() => {
-            if (i < currentText.length) {
-              // @ts-ignore
-              text.textContent += currentText.charAt(i);
-              i++;
-            } else {
-              clearInterval(interval2);
-
-              // Actualizar el índice al siguiente texto
-              index++;
-              if (index >= texts.length) {
-                index = 0;
-              }
-
-              // Llamar a la función de actualización de texto nuevamente después de un breve retraso
-              setTimeout(updateText, 3000);
-            }
-          }, 50);
-        }
-      }, 50);
-    }
-
-    updateText();*/
-
-
-
+    this.obtenerPremios()
     this.obtenerUltimoUsuario();
+
   }
 
 
@@ -97,6 +51,15 @@ export class InicioComponent implements OnInit {
         this.usuariosTotal = data[0].total;
       }
     )
+    }
+
+    public obtenerPremios(){
+    this.inicioService.obtenerPremios().subscribe(
+      resp => {
+        // @ts-ignore
+        const data = resp.data.articulo;
+        this.listaPremios = data;
+      });
     }
 
   public abrirModal(modal: any, size: any) {
@@ -121,15 +84,12 @@ export class InicioComponent implements OnInit {
           },
         error=>{
           console.log(error)
-        }
-        );
-
+        });
       this.modalService.dismissAll();
       Swal.fire('', 'Registro Completo','success')
     }else{
       Swal.fire('Opsss', 'Campos Vacios', 'error');
     }
-    this.obtenerUltimoUsuario();
   }
 
   aceptarCookies(){

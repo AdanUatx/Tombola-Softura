@@ -82,4 +82,14 @@ export class InicioService {
     }));
   }
 
+  obtenerPremios(){
+    return this.http.get(
+      this.url + '/back/rutas.php?peticion=articulo&funcion=listado',
+      {},
+      //{headers: AppSettingService.getHeaders()} Se usa en caso de que sea POST
+    ).pipe(map(resp => {
+      return resp;
+    }));
+  }
+
 }

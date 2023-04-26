@@ -204,5 +204,59 @@
   text-decoration: underline;
 }
 
+.mostrar-premios{
+  position: absolute;
+  right: 0;
+  width: 200px;
+  height: 30px;
+  background: white;
+  top: 60px;
+}
+
+.visualizar-regalos{
+  position: absolute;
+  bottom: 25%;
+  right: 0;
+  width: 185px;
+  cursor: pointer;
+  background: white;
+  border-bottom-left-radius: 45px;
+  border-top-left-radius: 45px;
+  box-shadow: rgba(0,0,0,0.2) 0px 18px 15px;
+}
+
+.animacion-regalo {
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  animation-name: girar-regalo;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes girar-regalo {
+
+  0% {
+    transform: scale(.5);
+    transform: rotate(-30deg);
+  }
+  30% {
+    transform: scale(.75);
+    transform: rotate(0de);
+  }
+  50% {
+    transform: scale(.5);
+    transform: rotate(30deg);
+  }
+  80% {
+    transform: scale(.75);
+    transform: rotate(0de);
+  }
+  100% {
+    transform: scale(.5);
+    transform: rotate(-30deg);
+  }
+}
+
 
 
