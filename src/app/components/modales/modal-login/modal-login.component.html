@@ -1,5 +1,6 @@
-<div class="center" *ngIf="!logueado" style=" background: linear-gradient(120deg,#2980b9, #8e44ad); padding-bottom: 20px">
-  <h1>Login<mat-icon>home</mat-icon></h1>
+<div class="center" *ngIf="!logueado" style=" box-shadow: rgba(0,0,0,0.3) 28px 26px 30px;
+  background: white; padding-bottom: 20px">
+  <h1 class="header-css">Login</h1>
   <form [formGroup]="formGroup1" (submit)="login()">
     <div class="txt_field">
       <input type="text" required formControlName="nombre"  name="nombre" id="nombre">
