@@ -4,15 +4,10 @@
   left: 150px;
 }
 h2 {
-  font: bold 60px/1 arial;
+  font: bold 30px/1 arial;
   text-transform: uppercase;
-  color: #c69c1e;
-  text-shadow: 0  2px 0 #8b6e15,
-  0  4px 0 #7c6213,
-  0  6px 0 #6e5611,
-  0  8px 0 #5f4b0e,
-  0 10px 0 #503f0c,
-  0 12px 0 #41330a;
+  color: #f80d3d;
+  text-shadow: 2px  2px 0px #f80d3d;
 }
 ul li a {
   cursor: pointer;

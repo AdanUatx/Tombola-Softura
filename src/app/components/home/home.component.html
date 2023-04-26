@@ -98,11 +98,11 @@
 
     <section class="col-11  Content p-5 text-center" *ngIf="Regalos">
 
-      <h2 class="d-flex justify-content-center text-center  fw-bold icon-gift" >Añadir Premio</h2>
+      <h2>Añadir Premio</h2>
       <div class="d-flex justify-content-center text-center mt-4">
         <form class="p-4 mt-4 bg-light"  id="form_regalos" method="post">
           <div class="form-group">
-            <label >Articulo:</label>
+            <label class="icon-gift1">Articulo:</label>
             <div class="input-group">
               <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -152,3 +152,6 @@
   <app-modal-login [logueado]="logueado"  (logueadosalida)="addItem($event)"></app-modal-login>
 </div>
 
+<ng-template #premios let-modal class="form-register">
+  <app-modal-premios></app-modal-premios>
+</ng-template>

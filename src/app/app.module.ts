@@ -8,22 +8,27 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ModalPremiosComponent } from './components/modales/modal-premios/modal-premios.component';
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatIconModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    MatMenuModule,
-  ],
-  providers: [
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
-],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ModalPremiosComponent,
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        MatMenuModule,
+    ],
+    providers: [
+        {provide: LocationStrategy, useClass: HashLocationStrategy}
+    ],
+    exports: [
+        ModalPremiosComponent
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
