@@ -10,11 +10,13 @@ import Swal  from 'sweetalert2';
   styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit {
+  public blnMostrarCookies: boolean = true;
 
   public usuariosTotal: number = 0;
   public modal_reference: NgbModalRef | undefined;
   public showFiller: boolean;
   public formGroup1: FormGroup;
+  condiciones_servicio: boolean = false;
   constructor(
     private inicioService: InicioService,
     private modalService: NgbModal,
@@ -29,7 +31,11 @@ export class InicioComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    if(localStorage.getItem('cookies')){
+      this.blnMostrarCookies = false
+    }else{
+      this.blnMostrarCookies = true;
+    }
 
 
    /* const texts = ['Participar', 'Sortear', 'Ganar!!!'];
@@ -77,18 +83,6 @@ export class InicioComponent implements OnInit {
 
     updateText();*/
 
-    var navbar = document.querySelector('#navbarNav');
-
-    // @ts-ignore
-    navbar.addEventListener('show.bs.collapse', function () {
-      // se ejecuta cuando el menú se muestra
-    });
-
-    // @ts-ignore
-    navbar.addEventListener('hide.bs.collapse', function () {
-      // se ejecuta cuando el menú se oculta
-    });
-
 
 
     this.obtenerUltimoUsuario();
@@ -122,18 +116,31 @@ export class InicioComponent implements OnInit {
     if(this.formGroup1.valid){
       this.inicioService.agregarUsuario(this.formGroup1.value).subscribe(
         result=>{
+          this.obtenerUltimoUsuario();
           console.log(result);
           },
         error=>{
           console.log(error)
         }
         );
-      this.obtenerUltimoUsuario();
+
       this.modalService.dismissAll();
       Swal.fire('', 'Registro Completo','success')
     }else{
       Swal.fire('Opsss', 'Campos Vacios', 'error');
     }
     this.obtenerUltimoUsuario();
+  }
+
+  aceptarCookies(){
+    localStorage.setItem('cookies','1');
+    this.blnMostrarCookies = false;
+  }
+
+  aceptarTerminosCondiciones(event){
+    this.condiciones_servicio = false;
+    if (event.target.checked) {
+      this.condiciones_servicio = true;
+    }
   }
 }
