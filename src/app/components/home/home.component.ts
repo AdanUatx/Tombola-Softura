@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
     this.loaderGiro = true;
     this.total = 0;
     this.resultado = '';
+    this.logueado = false;
   }
   public listaUsuarios: any;
   public pageSize: number;

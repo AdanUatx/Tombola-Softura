@@ -2,7 +2,6 @@ import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import Swal from 'sweetalert2';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
-
 @Component({
   selector: 'app-modal-login',
   templateUrl: './modal-login.component.html',

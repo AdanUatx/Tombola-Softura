@@ -47,8 +47,8 @@ button:hover{
 }
 .contenido
 {
-  margin: 0px;
-  width: 90%;
+  margin-left: .1px;
+  width: 109.8%;
   height: 100vh;
   background: #c7c5c5;
 }

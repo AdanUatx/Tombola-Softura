@@ -1,4 +1,4 @@
-<div *ngIf="logueado" class="container bg-warning p-0 m-0 col-lg-12 d-flex">
+<div *ngIf="logueado" class="container  p-0 m-0 col-12 d-flex">
   <div class="menulateral">
     <div class="d-flex flex-column flex-shrink-0 bg-light" >
       <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
@@ -39,10 +39,9 @@
       </div>
     </div>
   </div>
-  <div class="contenido">
+  <div class="contenido col-12">
 
     <section class="col-11  Content p-5 text-center" *ngIf="Usuarios">
-
       <h2> Usuarios Participantes</h2>
       <mat-paginator class="mat-elevation-z8"  [length]="total" [pageSize]="pageSize" (page)="getPaginatorData($event)">
       </mat-paginator>
@@ -73,7 +72,7 @@
 
     </section>
 
-      <section class="col-11  Content p-5 text-center" *ngIf="Sorteo">
+      <section class="col-11 Content p-5 text-center" *ngIf="Sorteo">
 
         <h2> Sorteo</h2>
         <div class="modal-header" style="background:white; display: block; border-radius: 5px !important;">
@@ -133,20 +132,9 @@
         </form>
       </div>
     </section>
-    <section class="col-11  Content p-5 text-center" *ngIf="Terminos">
-
-      <h2> Terminos y Condiciones</h2>
-    </section>
-
-  </div>
 
 </div>
-
+</div>
 <div  *ngIf="!logueado" class="container">
-  <strong>{{logueado}}</strong>
   <app-modal-login [logueado]="logueado"  (logueadosalida)="addItem($event)"></app-modal-login>
 </div>
-
-<ng-template #premios let-modal class="form-register">
-  <app-modal-premios></app-modal-premios>
-</ng-template>

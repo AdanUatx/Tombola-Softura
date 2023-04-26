@@ -8,11 +8,10 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { ModalPremiosComponent } from './components/modales/modal-premios/modal-premios.component';
+import { CommonModule } from '@angular/common';
 @NgModule({
     declarations: [
         AppComponent,
-        ModalPremiosComponent,
     ],
     imports: [
         BrowserModule,
@@ -22,12 +21,12 @@ import { ModalPremiosComponent } from './components/modales/modal-premios/modal-
         HttpClientModule,
         ReactiveFormsModule,
         MatMenuModule,
+        CommonModule
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy}
     ],
     exports: [
-        ModalPremiosComponent
     ],
     bootstrap: [AppComponent]
 })

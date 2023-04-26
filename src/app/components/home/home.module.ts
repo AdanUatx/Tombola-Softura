@@ -10,7 +10,6 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {ModalPremiosComponent} from '../modales/modal-premios/modal-premios.component';
 @NgModule({
   declarations: [
     HomeComponent
@@ -27,7 +26,6 @@ import {ModalPremiosComponent} from '../modales/modal-premios/modal-premios.comp
     MatCardModule,
     MatButtonToggleModule,
     MatTooltipModule,
-    ModalPremiosComponent
   ],
   exports: [
     HomeComponent
