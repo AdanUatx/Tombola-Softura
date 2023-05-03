@@ -25,6 +25,11 @@
             Realizar Sorteo
           </a>
         </li>
+        <li>
+          <a (click)="seccionActiva('Ganadores')"  [ngClass]="Ganadores?'active':''"  class="nav-link py-3 border-bottom icon-users" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
+            Visualizar Ganadores
+          </a>
+        </li>
       </ul>
       <div class="dropdown border-top">
         <a  class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle icon-user-solid-circle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
@@ -72,6 +77,8 @@
           <span *ngIf="descargando" class="spinner-border spinner-border-sm" role="status "
                 aria-hidden="true "></span>Descargar Excel
         </a>
+
+        <button class="btn btn-danger" (click)="eliminarTablaUsuarios()">Eliminar Tabla</button>
       </div>
 
     </section>
@@ -140,6 +147,35 @@
         </form>
       </div>
 
+    </section>
+
+    <section class="col-11 Content p-5 text-center" *ngIf="Ganadores">
+      <div class="table-responsive" >
+        <table class="table text-center" id="ganadores">
+          <thead class="thead-dark">
+          <tr>
+            <th scope="col">#id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">correo</th>
+            <th scope="col">Empresa</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let persona of listaGanadores">
+            <td> <span>{{persona.idUsuario}}</span></td>
+
+            <td><span>{{persona.nombreUsuario}}</span></td>
+            <td><span>{{persona.correo}}</span></td>
+            <td><span>{{persona.cargo}}</span></td>
+          </tr>
+          </tbody>
+        </table>
+
+        <a  class="btn btn-success excel" *ngIf="!descargando" (click)="descargarExcel()" >
+          <span *ngIf="descargando" class="spinner-border spinner-border-sm" role="status "
+                aria-hidden="true "></span>Descargar Excel
+        </a>
+      </div>
     </section>
 
 </div>

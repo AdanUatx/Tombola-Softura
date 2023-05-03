@@ -12,6 +12,7 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  Ganadores: boolean;
 
   constructor(
     private inicioService: InicioService,
@@ -38,6 +39,7 @@ export class HomeComponent implements OnInit {
     this.logueado = false;
   }
   public listaUsuarios: any;
+  public listaGanadores: any;
   public pageSize: number;
   public festejo: string;
   public pageIndex: number;
@@ -86,11 +88,24 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  obtenerUsuariosGanadores() {
+    this.inicioService.obtenerUsuariosGanadores().subscribe(
+      resp => {
+        this.listaGanadores = resp.data.ganadores;
+      }
+    );
+  }
+
+  eliminarTablaUsuarios(){
+
+  }
+
   public seccionActiva(seccion: any) {
     this.Regalos = false;
     this.Usuarios = false;
     this.Sorteo = false;
     this.Terminos = false;
+    this.Ganadores = false;
     if (seccion === 'Usuario') {
       this.Usuarios = true;
     }
@@ -102,6 +117,11 @@ export class HomeComponent implements OnInit {
     }
     if (seccion === 'TyC') {
       this.Terminos = true;
+    }
+    if (seccion === 'Ganadores'){
+      this.Ganadores = true;
+      this.obtenerUsuariosGanadores();
+
     }
   }
 
@@ -142,6 +162,7 @@ export class HomeComponent implements OnInit {
     // Detener el efecto después de un tiempo determinado (por ejemplo, 2 segundos)
     setTimeout(() => {
       this.detener();
+      this.agregarGanador(this.ganador);
       console.log(this.ganador);
       Swal.fire({
         title: 'El ganador es:',
@@ -173,6 +194,15 @@ export class HomeComponent implements OnInit {
       Swal.fire('Error', 'Ocurrió un error al enviar la solicitud.', 'error');
     });
 }
+ public agregarGanador(ganador: any){
+    this.inicioService.agregarGanador(ganador).subscribe(
+      (Response) => {
+        console.log('Registro Exitoso');
+      }, (error) => {
+        console.log("Nel We");
+   }
+    )
+ }
   public agregarFestividad(){
     this.load = true;
     localStorage.setItem('festividad', this.festejo);

@@ -34,6 +34,16 @@ export class InicioService {
     }));
   }
 
+  obtenerUsuariosGanadores(): Observable <any>{
+    return this.http.get(
+      this.url + '/back/rutas.php?peticion=ganadores&funcion=listado',
+      {},
+      //{headers: AppSettingService.getHeaders()} Se usa en caso de que sea POST
+    ).pipe(map(resp => {
+      return resp;
+    }));
+  }
+
   agregarUsuario(usuario: any): Observable<any>{
     var request="/back/rutas.php?peticion=usuario&funcion=nuevo";
     let datas = new FormData();
@@ -46,6 +56,20 @@ export class InicioService {
       datas).pipe(map(respuesta=>{
         return respuesta;
       }));
+  }
+
+  agregarGanador(usuario: any): Observable<any>{
+    let datas = new FormData();
+    datas.append('nombreUsuario', usuario.nombre);
+    datas.append('correo', usuario.correo);
+    datas.append('telefono',usuario.telefono);
+    datas.append('cargo',usuario.cargo);
+    datas.append('nombreArticulo',null);
+    return this.http.post(
+      this.url + '/back/rutas.php?peticion=ganador&funcion=nuevo',
+      datas).pipe(map(respuesta  => {
+      return respuesta;
+    }));
   }
   sendSMS(toNumber: string, message: string) {
     const body = new URLSearchParams({
@@ -91,5 +115,7 @@ export class InicioService {
       return resp;
     }));
   }
+
+
 
 }
