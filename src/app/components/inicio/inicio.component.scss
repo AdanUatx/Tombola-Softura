@@ -225,6 +225,18 @@
   box-shadow: rgba(0,0,0,0.2) 0px 18px 15px;
 }
 
+.visualizar-ganadores{
+  position: absolute;
+  bottom: 25%;
+  left: 0;
+  width: 210px;
+  cursor: pointer;
+  background: white;
+  border-bottom-right-radius: 45px;
+  border-top-right-radius: 45px;
+  box-shadow: rgba(0,0,0,0.2) 0px 18px 15px;
+}
+
 .animacion-regalo {
   width: 50px;
   height: 50px;

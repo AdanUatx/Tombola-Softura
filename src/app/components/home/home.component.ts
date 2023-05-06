@@ -83,6 +83,7 @@ export class HomeComponent implements OnInit {
     this.inicioService.obtenerUsuarios().subscribe(
       resp => {
         this.listaUsuarios = resp.data.usuario;
+        console.log(this.listaUsuarios);
         this.total = this.listaUsuarios.length;
       }
     );
@@ -214,6 +215,17 @@ export class HomeComponent implements OnInit {
     this.descargando = true;
     const name = 'Usuarios.xlsx';
     const element = document.getElementById('usuarios');
+    const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    const book: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(book, worksheet, 'Respuestas');
+    XLSX.writeFile(book, name);
+    setTimeout(() => { this.descargando = false;   }, 2000);
+  }
+
+  descargarExcelGanadores(){
+    this.descargando = true;
+    const name = 'UsuariosGanadores.xlsx';
+    const element = document.getElementById('ganadores');
     const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
     const book: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(book, worksheet, 'Respuestas');

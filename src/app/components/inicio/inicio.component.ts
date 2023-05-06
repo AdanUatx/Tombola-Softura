@@ -19,6 +19,7 @@ export class InicioComponent implements OnInit {
   public formGroup1: FormGroup;
   condiciones_servicio: boolean = false;
   listaPremios: any;
+  lstGanadores: any;
   constructor(
     private inicioService: InicioService,
     private modalService: NgbModal,
@@ -41,6 +42,7 @@ export class InicioComponent implements OnInit {
     }
     this.obtenerPremios();
     this.obtenerUltimoUsuario();
+    this.obtenerGanadores();
     this.festejo = localStorage.getItem('festividad');
   }
 
@@ -73,10 +75,16 @@ export class InicioComponent implements OnInit {
       windowClass: 'modal-holder'
     });
   }
-    openSM(contenido: any){
-      this.modalService.open(contenido,{size:'md'})
-    }
 
+  openSM(contenido: any){
+    this.modalService.open(contenido,{size:'md'})
+  }
+
+  cerrarModal() {
+    this.formGroup1.reset();
+    this.condiciones_servicio = false;
+    this.modalService.dismissAll();
+  }
   nuevo(){
     if(this.formGroup1.valid){
       this.inicioService.agregarUsuario(this.formGroup1.value).subscribe(
@@ -88,6 +96,8 @@ export class InicioComponent implements OnInit {
           console.log(error)
         });
       this.modalService.dismissAll();
+      this.formGroup1.reset();
+      this.condiciones_servicio = false;
       Swal.fire('', 'Registro Completo','success')
     }else{
       Swal.fire('Opsss', 'Campos Vacios', 'error');
@@ -104,5 +114,15 @@ export class InicioComponent implements OnInit {
     if (event.target.checked) {
       this.condiciones_servicio = true;
     }
+  }
+
+  obtenerGanadores(){
+    this.inicioService.obtenerUsuariosGanadores().subscribe(
+      result => {
+        this.lstGanadores = result.data.ganadores;
+        },
+      error => {
+        console.log(error)
+      });
   }
 }
