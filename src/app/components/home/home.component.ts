@@ -257,7 +257,7 @@ export class HomeComponent implements OnInit {
 
   /**
    * Algoritmo para realizar el sorteo dentro de la tombola obteniendo ganador y premio a la vez
-   */
+   *
   public girar() {
     // Detener cualquier animación en curso o reiniciar el resultado
     this.detener();
@@ -291,7 +291,45 @@ export class HomeComponent implements OnInit {
       });
     }, 2000);
     //this.sendMessage();
+  }*/
+
+  public girar() {
+    // Detener cualquier animación en curso o reiniciar el resultado
+    this.detener();
+    this.sumaProbabilidad = this.lstPremios.reduce((acumulador, premio) => acumulador + parseInt(premio.probabilidad),0);
+    // Asignar pesos a cada premio proporcional a su probabilidad
+    const pesos = this.lstPremios.map(premio => parseInt(premio.probabilidad) / this.sumaProbabilidad * 100);
+    // Simular el efecto de la máquina tragamonedas
+    this.interval = setInterval(() => {
+      this.resultado = this.listaUsuarios[Math.floor(Math.random() * this.listaUsuarios.length)];
+      this.ganador = this.resultado;
+      let numAleatorio = Math.random() * 100;
+      let ganadorPremio = null;
+      for (let i = 0; i < this.lstPremios.length; i++) {
+        numAleatorio -= pesos[i];
+        if (numAleatorio <= 0) {
+          ganadorPremio = this.lstPremios[i];
+          break;
+        }
+      }
+      this.premioGanador = ganadorPremio.nombre;
+      this.descuentoArticulo = ganadorPremio.idarticulo;
+    }, 100);
+    // Detener el efecto después de un tiempo determinado (por ejemplo, 2 segundos)
+    setTimeout(() => {
+      this.detener();
+      this.agregarGanador(this.ganador, this.premioGanador);
+      this.descontarArticulo(this.descuentoArticulo);
+      console.log(this.ganador, this.premioGanador);
+      Swal.fire({
+        title: 'El ganador es:',
+        text: this.ganador.nombre + ' y su premio ha sido: ' +  this.premioGanador,
+        icon: 'success',
+      });
+    }, 2000);
+    //this.sendMessage();
   }
+
 
   /**
    * Funcion para el envio de mensaje al ganador del sorteo
