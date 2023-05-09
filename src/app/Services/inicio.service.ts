@@ -72,6 +72,7 @@ export class InicioService {
       return respuesta;
     }));
   }
+
   sendSMS(toNumber: string, message: string) {
     const body = new URLSearchParams({
       To: toNumber,
@@ -95,6 +96,7 @@ export class InicioService {
       return respuesta;
     }));
   }
+
   GuardarRegalos(articulo: any, cantidad: any, probabilidad: any): Observable<any>{
     let datas = new FormData();
     datas.append('nombre', articulo);
@@ -135,11 +137,20 @@ export class InicioService {
     }));
   }
 
+  truncarTablaPremios(): Observable <any>{
+    return this.http.get(
+      this.url + '/back/rutas.php?peticion=articulo&funcion=limpiar',
+      {},
+    ).pipe(map(resp => {
+      return resp;
+    }));
+  }
+
   descontarArticulo(idarticulo: any): Observable<any>{
     let datas = new FormData();
     datas.append('idarticulo', idarticulo);
     return this.http.post(
-      this.url + '/back/rutas.php?peticion=articulo&funcion=eliminar', datas
+      this.url + '/back/rutas.php?peticion=articulo&funcion=quitarArticulo', datas
     ).pipe(map(resp => {
       return resp;
     }))

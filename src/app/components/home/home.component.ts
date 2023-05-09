@@ -126,6 +126,26 @@ export class HomeComponent implements OnInit {
     });
   }
 
+
+  resetearSorteoConfirm(){
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Una vez que confirmes, no podrás deshacer esta acción.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, Reestablacer Valores',
+    }).then((result) => {
+      if (result.value) {
+        //aqui se ejecuta el servicio
+        this.eliminarTablaGanadores();
+        this.eliminarTablaUsuarios();
+        this.eliminarTablaPremio();
+      }
+    });
+  }
+
   /**
    * Funcion para confirmar truncado de tabla de ganadores
    */
@@ -169,7 +189,7 @@ export class HomeComponent implements OnInit {
    */
   eliminarTablaGanadores() {
     this.inicioService.truncarTablaGanadores().subscribe((response) => {
-      if (response.status == false) {
+      if (response.success == false) {
         Swal.fire('', 'Usuarios Eliminados Correctamente', 'success');
         this.obtenerUsuariosGanadores();
       } else {
@@ -180,6 +200,21 @@ export class HomeComponent implements OnInit {
         );
       }
     });
+  }
+
+  eliminarTablaPremio(){
+    this.inicioService.truncarTablaPremios().subscribe((response) => {
+      if (response.success == false) {
+        Swal.fire('', 'Sorteo se ha reestablecido', 'success');
+        this.obtenerPremios();
+      } else {
+        Swal.fire(
+          'Opsssss',
+          'Ha ocurrido un error al truncar la tabla',
+          'error'
+        );
+      }
+    })
   }
 
   /**

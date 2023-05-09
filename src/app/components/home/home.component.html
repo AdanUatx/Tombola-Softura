@@ -30,6 +30,11 @@
             <p class="menulateral-item">Visualizar Ganadores</p>
           </a>
         </li>
+        <li style="background: red;">
+          <a (click)="resetearSorteoConfirm()" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products" style="color: white;">
+            <p class="menulateral-item">Resetear Sorteo</p>
+          </a>
+        </li>
       </ul>
       <div class="dropdown border-top">
         <a  class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle icon-user-solid-circle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false">
@@ -86,7 +91,6 @@
     </section>
 
       <section class="col-11 Content p-5 text-center" *ngIf="Sorteo">
-
         <h2> Sorteo</h2>
         <div class="modal-header" style="background:white; display: block; border-radius: 5px !important;">
           <div class="modal-title">
