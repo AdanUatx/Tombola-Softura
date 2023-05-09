@@ -58,15 +58,16 @@ export class InicioService {
       }));
   }
 
-  agregarGanador(usuario: any): Observable<any>{
+  agregarGanador(usuario: any, premio: any): Observable<any>{
     let datas = new FormData();
+    datas.append('idUsuario', usuario.idusuario);
     datas.append('nombreUsuario', usuario.nombre);
     datas.append('correo', usuario.correo);
     datas.append('telefono',usuario.telefono);
     datas.append('cargo',usuario.cargo);
-    datas.append('nombreArticulo',null);
+    datas.append('nombreArticulo',premio);
     return this.http.post(
-      this.url + '/back/rutas.php?peticion=ganador&funcion=nuevo',
+      this.url + '/back/rutas.php?peticion=ganadores&funcion=nuevo',
       datas).pipe(map(respuesta  => {
       return respuesta;
     }));
@@ -134,6 +135,14 @@ export class InicioService {
     }));
   }
 
-
+  descontarArticulo(idarticulo: any): Observable<any>{
+    let datas = new FormData();
+    datas.append('idarticulo', idarticulo);
+    return this.http.post(
+      this.url + '/back/rutas.php?peticion=articulo&funcion=eliminar', datas
+    ).pipe(map(resp => {
+      return resp;
+    }))
+  }
 
 }
