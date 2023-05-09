@@ -116,6 +116,24 @@ export class InicioService {
     }));
   }
 
+  truncarTablaUsuarios(): Observable <any>{
+    return this.http.get(
+      this.url + '/back/rutas.php?peticion=usuario&funcion=truncar',
+      {},
+    ).pipe(map(resp => {
+      return resp;
+    }));
+  }
+
+  truncarTablaGanadores(): Observable <any>{
+    return this.http.get(
+      this.url + '/back/rutas.php?peticion=ganadores&funcion=limpiar',
+      {},
+    ).pipe(map(resp => {
+      return resp;
+    }));
+  }
+
 
 
 }

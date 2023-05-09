@@ -7,27 +7,27 @@
       <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
         <li class="nav-item">
           <a (click)="regresarInicio()" class="nav-link  py-3 border-bottom icon-home" aria-current="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
-            Inicio Tombola
+            <p class="menulateral-item">Regresar al Inicio</p>
           </a>
         </li>
         <li>
           <a (click)="seccionActiva('Regalos')" [ngClass]="Regalos?'active':''"  class="nav-link py-3 border-bottom icon-gift1" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
-          Regalos
+          <p class="menulateral-item">Regalos</p>
           </a>
         </li>
         <li>
           <a (click)="seccionActiva('Usuario')" [ngClass]="Usuarios?'active':''"  class="nav-link  py-3 border-bottom icon-users" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
-           Usuarios
+           <p class="menulateral-item">Usuarios</p>
           </a>
         </li>
         <li>
           <a (click)="seccionActiva('Sorteo')"  [ngClass]="Sorteo?'active':''"  class="nav-link py-3 border-bottom icon-clubs" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
-            Realizar Sorteo
+            <p class="menulateral-item">Realizar Sorteo</p>
           </a>
         </li>
         <li>
           <a (click)="seccionActiva('Ganadores')"  [ngClass]="Ganadores?'active':''"  class="nav-link py-3 border-bottom icon-users" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Products">
-            Visualizar Ganadores
+            <p class="menulateral-item">Visualizar Ganadores</p>
           </a>
         </li>
       </ul>
@@ -80,7 +80,7 @@
                 aria-hidden="true "></span>Descargar Excel
         </a>
 
-        <button class="btn btn-danger" (click)="eliminarTablaUsuarios()">Eliminar Tabla</button>
+        <button class="btn btn-danger" [disabled]="listaUsuarios.length <= 0" (click)="eliminarTablaUsuariosConfirm()">Eliminar Tabla</button>
       </div>
 
     </section>
@@ -158,15 +158,18 @@
           <tr>
             <th scope="col">#id</th>
             <th scope="col">Nombre</th>
+            <th scope="col">Articulo</th>
             <th scope="col">correo</th>
+            <th scope="col">teléfono</th>
             <th scope="col">Empresa</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let persona of listaGanadores">
             <td> <span>{{persona.idUsuario}}</span></td>
-
             <td><span>{{persona.nombreUsuario}}</span></td>
+            <td><span>{{ persona.nombreArticulo}}</span></td>
+            <td><span>{{persona.telefono}}</span></td>
             <td><span>{{persona.correo}}</span></td>
             <td><span>{{persona.cargo}}</span></td>
           </tr>
@@ -177,6 +180,8 @@
           <span *ngIf="descargando" class="spinner-border spinner-border-sm" role="status "
                 aria-hidden="true "></span>Descargar Excel
         </a>
+
+        <button class="btn btn-danger" [disabled]="listaGanadores.length <= 0" (click)="eliminarTablaGanadoresConfirm()">Eliminar Tabla</button>
       </div>
     </section>
 

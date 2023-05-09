@@ -83,7 +83,6 @@ export class HomeComponent implements OnInit {
     this.inicioService.obtenerUsuarios().subscribe(
       resp => {
         this.listaUsuarios = resp.data.usuario;
-        console.log(this.listaUsuarios);
         this.total = this.listaUsuarios.length;
       }
     );
@@ -97,8 +96,64 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  eliminarTablaUsuarios(){
+  eliminarTablaUsuariosConfirm(){
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Una vez que confirmes, no podrás deshacer esta acción.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, Reestablacer Valores'
+    }).then((result) => {
+      if (result.value) {
+        //aqui se ejecuta el servicio
+        this.eliminarTablaUsuarios();
+      }
+    })
+  }
 
+  eliminarTablaGanadoresConfirm(){
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Una vez que confirmes, no podrás deshacer esta acción.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, Reestablacer Valores'
+    }).then((result) => {
+      if (result.value) {
+        //aqui se ejecuta el servicio
+        this.eliminarTablaGanadores();
+      }
+    })
+  }
+
+  eliminarTablaUsuarios(){
+    this.inicioService.truncarTablaUsuarios().subscribe(
+      response => {
+        if(response.status == false){
+          Swal.fire('','Usuarios Eliminados Correctamente','success');
+          this.obtenerUsuarios();
+        }else{
+          Swal.fire('Opsssss','Ha ocurrido un error al truncar la tabla','error');
+        }
+      }
+    )
+  }
+
+  eliminarTablaGanadores(){
+    this.inicioService.truncarTablaGanadores().subscribe(
+      response => {
+        if(response.status == false){
+          Swal.fire('','Usuarios Eliminados Correctamente','success');
+          this.obtenerUsuariosGanadores();
+        }else{
+          Swal.fire('Opsssss','Ha ocurrido un error al truncar la tabla','error');
+        }
+      }
+    )
   }
 
   public seccionActiva(seccion: any) {

@@ -34,9 +34,16 @@ button:hover{
 .menulateral
 {
   margin: 0px;
-  width:10%;
+  width:15%;
   height: 100vh;
   background: #f8f9fa;
+}
+
+
+.menulateral-item{
+  font-family: Century Gothic;
+  margin: 0px !important;
+  font-weight: 600;
 }
 .contenido
 {
