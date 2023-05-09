@@ -244,6 +244,17 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  public eliminarUsuarioGanador(id: number) {
+    this.inicioService.eliminarUsuario(id).subscribe(
+      (Result) => {
+        this.obtenerUsuarios();
+      },
+      (error) => {
+        Swal.fire('Error', 'Ocurrió un error al enviar la solicitud.', 'error');
+      }
+    );
+  }
+
   /**
    * Algoritmo para realizar el sorteo dentro de la tombola obteniendo ganador y premio a la vez
    */
@@ -343,7 +354,7 @@ export class HomeComponent implements OnInit {
   public agregarGanador(ganador: any, premio: any) {
     this.inicioService.agregarGanador(ganador, premio).subscribe(
       (Response) => {
-        console.log('Registro Exitoso');
+        this.eliminarUsuarioGanador(ganador.idusuario);
       },
       (error) => {
         console.log('Nel We');
