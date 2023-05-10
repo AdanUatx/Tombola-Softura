@@ -111,45 +111,40 @@
     </section>
 
     <section class="col-11  Content p-5 text-center" *ngIf="Regalos">
-      <h2>Añadir Premio</h2>
-      <div class="d-flex justify-content-center text-center mt-4">
-        <form class="p-4 mt-4 bg-light"  id="form_regalos" method="post">
-          <div class="form-group">
-            <label class="icon-gift1">Articulo:</label>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="icon-list-add"></i>
-                    </span>
-              </div>
-              <input type="text" class="form-control" id="nombre" name="nombre" required  [(ngModel)]="nombre">
-            </div>
-          </div>
-          <div class="form-group">
-            <label >Cantidad:</label>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="icon-pen"></i>
-                    </span>
-              </div>
-              <input type="number" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="cantidad" required>
-            </div>
-          </div>
-          <div class="form-group">
-            <label >Probabilidad:</label>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <i class="icon-pen"></i>
-                    </span>
-              </div>
-              <input type="number" class="form-control" id="probabilidad" name="probabilidad" [(ngModel)]="probabilidad" placeholder="Ingrese la probabilidad deseada para obtener el premio del 1 al 10" required>
-            </div>
-          </div>
-          <label>Probabilidad Total: {{this.sumaProbabilidad}}</label> <br>
-          <button class="btn  mt-4 btn-danger icon-circle-up fw-bold p-2" [disabled]="sumaProbabilidad === 100"  (click)="guardaRegalo()"   id="guardarRegalo">Registrar</button>
-        </form>
+      <h2> Seccion de Premios </h2>
+      <button class="btn btn-primary" (click)="abrirModal(RegistroPremio)"> Añadir Premio </button>
+      <label>La probabilidad registrada es de: %{{this.sumaProbabilidad}} y tienes disponible %{{100 - this.sumaProbabilidad}}</label>
+      <div class="table-responsive" >
+        <table class="table text-center" id="premios">
+          <thead class="thead-dark">
+          <tr>
+            <th scope="col">#id</th>
+            <th scope="col">Nombre Articulo</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Probabilidad</th>
+            <th scope="col">Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let premio of lstPremios">
+            <td><span>{{ premio.idarticulo }}</span></td>
+            <td><span>{{ premio.nombre }}</span></td>
+            <td><span>{{ premio.cantidad }}</span></td>
+            <td><span>{{ premio.probabilidad }} </span></td>
+            <td style="display: flex; justify-content: space-evenly;">
+              <a class="btn btn-danger"(click)="eliminarArticuloByID(premio.idarticulo)" style="cursor: pointer;"> Eliminar</a>
+              <a class="btn btn-warning" (click)="editarArticuloByID(modalEditarArticulo,premio)" style="cursor: pointer;"> Editar</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <a  class="btn btn-success excel" *ngIf="!descargando" (click)="descargarExcelPremios()" >
+          <span *ngIf="descargando" class="spinner-border spinner-border-sm" role="status "
+                aria-hidden="true "></span>Descargar Excel
+        </a>
+
+        <button class="btn btn-danger" [disabled]="lstPremios.length <= 0" (click)="eliminarTablaPremiosConfirm()">Eliminar Tabla</button>
       </div>
     </section>
 
@@ -170,7 +165,7 @@
           <tr *ngFor="let persona of listaGanadores">
             <td> <span>{{persona.idUsuario}}</span></td>
             <td><span>{{persona.nombreUsuario}}</span></td>
-            <td><span>{{ persona.nombreArticulo}}</span></td>
+            <td><span>{{persona.nombreArticulo}}</span></td>
             <td><span>{{persona.telefono}}</span></td>
             <td><span>{{persona.correo}}</span></td>
             <td><span>{{persona.cargo}}</span></td>
@@ -192,3 +187,100 @@
 <div  *ngIf="!logueado" class="contenido" >
   <app-modal-login [logueado]="logueado"  (logueadosalida)="addItem($event)"></app-modal-login>
 </div>
+
+<ng-template #RegistroPremio let-modal class="form-register">
+  <div class="modal-header">
+    <h4 class="modal-title">Añadir Premio</h4>
+    <button class="controls1" aria-label="close" type="button" (click)="cerrarModal()">
+      <span aria-hidden="true" class="text-danger">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <form class="p-4 mt-4 bg-light"  id="form_regalos" method="post">
+        <div class="form-group">
+          <label class="icon-gift1">Articulo:</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+                  <span class="input-group-text">
+                      <i class="icon-list-add"></i>
+                  </span>
+            </div>
+            <input type="text" class="form-control" id="nombre" name="nombre" required  [(ngModel)]="nombre">
+          </div>
+        </div>
+        <div class="form-group">
+          <label >Cantidad:</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+                  <span class="input-group-text">
+                      <i class="icon-pen"></i>
+                  </span>
+            </div>
+            <input type="number" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="cantidad" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label >Probabilidad:</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+                  <span class="input-group-text">
+                      <i class="icon-pen"></i>
+                  </span>
+            </div>
+            <input type="number" class="form-control" id="probabilidad" name="probabilidad" [(ngModel)]="probabilidad" placeholder="Ingrese la probabilidad deseada para obtener el premio del 1 al 10" required>
+          </div>
+        </div>
+        <label>Probabilidad Total: {{this.sumaProbabilidad}}</label> <br>
+        <button class="btn  mt-4 btn-danger icon-circle-up fw-bold p-2" [disabled]="sumaProbabilidad === 100"  (click)="guardaRegalo()"   id="guardarRegalo">Registrar</button>
+      </form>
+  </div>
+</ng-template>
+
+
+<ng-template #modalEditarArticulo let-modal class="form-register">
+  <div class="modal-header">
+    <h4 class="modal-title">Editar Premio</h4>
+    <button class="controls1" aria-label="close" type="button" (click)="cerrarModal()">
+      <span aria-hidden="true" class="text-danger">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <form class="p-4 mt-4 bg-light"  id="form_regalos" method="post">
+        <div class="form-group">
+          <label class="icon-gift1">Articulo:</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+                  <span class="input-group-text">
+                      <i class="icon-list-add"></i>
+                  </span>
+            </div>
+            <input type="text" class="form-control" id="nombre" name="nombre" required  [(ngModel)]="this.seleccionTO.nombre">
+          </div>
+        </div>
+        <div class="form-group">
+          <label >Cantidad:</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+                  <span class="input-group-text">
+                      <i class="icon-pen"></i>
+                  </span>
+            </div>
+            <input type="number" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="this.seleccionTO.cantidad" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label >Probabilidad:</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+                  <span class="input-group-text">
+                      <i class="icon-pen"></i>
+                  </span>
+            </div>
+            <input type="number" class="form-control" id="probabilidad" name="probabilidad" [(ngModel)]="this.seleccionTO.probabilidad" placeholder="Ingrese la probabilidad deseada para obtener el premio del 1 al 10" required>
+          </div>
+        </div>
+        <label>Probabilidad Total: {{this.sumaProbabilidad}}</label> <br>
+        <button class="btn  mt-4 btn-danger icon-circle-up fw-bold p-2" (click)="actualizarRegalo(this.seleccionTO.idarticulo,this.seleccionTO.nombre, this.seleccionTO.cantidad, this.seleccionTO.probabilidad)"   id="guardarRegalo">Registrar</button>
+      </form>
+  </div>
+</ng-template>

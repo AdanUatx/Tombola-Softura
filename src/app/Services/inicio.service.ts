@@ -3,6 +3,7 @@ import {HttpClient,HttpHeaders} from '@angular/common/http';
 import {AppSettingService} from '../app-setting.service';
 import { Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import { ObserversModule } from '@angular/cdk/observers';
 @Injectable({
   providedIn: 'root'
 })
@@ -150,7 +151,30 @@ export class InicioService {
     let datas = new FormData();
     datas.append('idarticulo', idarticulo);
     return this.http.post(
+      this.url + '/back/rutas.php?peticion=articulo&funcion=eliminar', datas
+    ).pipe(map(resp => {
+      return resp;
+    }))
+  }
+
+  eliminarArticulo(idarticulo: any): Observable<any>{
+    let datas = new FormData();
+    datas.append('idarticulo', idarticulo);
+    return this.http.post(
       this.url + '/back/rutas.php?peticion=articulo&funcion=quitarArticulo', datas
+    ).pipe(map(resp => {
+      return resp;
+    }))
+  }
+
+  editarArticulo(idpremio: any, articulo: any, cantidad: any, probabilidad: any): Observable <any>{
+    let datas = new FormData();
+    datas.append('idarticulo',idpremio);
+    datas.append('nombre', articulo);
+    datas.append('cantidad', cantidad);
+    datas.append('probabilidad', probabilidad);
+    return this.http.post(
+      this.url + '/back/rutas.php?peticion=articulo&funcion=actualizar', datas
     ).pipe(map(resp => {
       return resp;
     }))

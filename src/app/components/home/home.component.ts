@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import * as XLSX from 'xlsx';
+import { NgbModal , NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-home',
@@ -17,11 +19,13 @@ export class HomeComponent implements OnInit {
   lstPremios: any;
   premioGanador: any;
   descuentoArticulo: any;
+  seleccionTO: any;
 
   constructor(
     private inicioService: InicioService,
     private router: Router,
-    private paginator: MatPaginatorIntl
+    private paginator: MatPaginatorIntl,
+    private modalService: NgbModal,
   ) {
     this.paginator.itemsPerPageLabel = 'Usuarios por pagina:';
     this.paginator.previousPageLabel = 'Previous';
@@ -122,6 +126,23 @@ export class HomeComponent implements OnInit {
       if (result.value) {
         //aqui se ejecuta el servicio
         this.eliminarTablaUsuarios();
+      }
+    });
+  }
+
+  eliminarTablaPremiosConfirm() {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Una vez que confirmes, no podrás deshacer esta acción.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, Reestablacer Valores',
+    }).then((result) => {
+      if (result.value) {
+        //aqui se ejecuta el servicio
+        this.eliminarTablaPremio();
       }
     });
   }
@@ -451,7 +472,7 @@ export class HomeComponent implements OnInit {
    */
   descargarExcel() {
     this.descargando = true;
-    const name = 'Usuarios.xlsx';
+    const name = 'Reporte_Usuarios.xlsx';
     const element = document.getElementById('usuarios');
     const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
     const book: XLSX.WorkBook = XLSX.utils.book_new();
@@ -467,8 +488,21 @@ export class HomeComponent implements OnInit {
    */
   descargarExcelGanadores() {
     this.descargando = true;
-    const name = 'UsuariosGanadores.xlsx';
+    const name = 'Reporte_UsuariosGanadores.xlsx';
     const element = document.getElementById('ganadores');
+    const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    const book: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(book, worksheet, 'Respuestas');
+    XLSX.writeFile(book, name);
+    setTimeout(() => {
+      this.descargando = false;
+    }, 2000);
+  }
+
+  descargarExcelPremios(){
+    this.descargando = true;
+    const name = 'Reporte_PremiosSorteados.xlsx';
+    const element = document.getElementById('premios');
     const worksheet: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
     const book: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(book, worksheet, 'Respuestas');
@@ -511,5 +545,48 @@ export class HomeComponent implements OnInit {
     this.inicioService.descontarArticulo(idarticulo).subscribe((response) => {
       this.obtenerPremios();
     });
+  }
+
+  eliminarArticuloByID(idarticulo: any) {
+    this.inicioService.eliminarArticulo(idarticulo).subscribe((response) => {
+      Swal.fire('','Premio Eliminado con Exito','success')
+      this.obtenerPremios();
+    })
+  }
+
+  public abrirModal(modal: any) {
+    this.modalService.open(modal, {
+      backdrop: 'static',
+      keyboard: false,
+      centered: true,
+      size: 'md',
+      windowClass: 'modal-holder'
+    });
+  }
+
+  public editarArticuloByID(modal: any, premioSeleccionado: any){
+    this.seleccionTO = premioSeleccionado;
+    this.modalService.open(modal, {
+      backdrop: 'static',
+      keyboard: false,
+      centered: true,
+      size: 'md',
+      windowClass: 'modal-holder'
+    });
+  }
+
+  public cerrarModal(){
+    this.modalService.dismissAll();
+  }
+
+  public actualizarRegalo(idarticulo: any, articulo: any, cantidad: any, probabilidad: any){
+    console.log(idarticulo,articulo,cantidad,probabilidad);
+    this.inicioService.editarArticulo(idarticulo,articulo,cantidad,probabilidad).subscribe(
+      (result) => {
+          Swal.fire('','Premio Actualizaco con Exito','success');
+          this.obtenerPremios();
+          this.modalService.dismissAll();
+      }
+    )
   }
 }

@@ -55,3 +55,7 @@ button:hover{
 .excel{
   margin-left: auto;
 }
+
+.modal-header{
+  height: 65px !important;
+}
